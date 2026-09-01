@@ -116,8 +116,8 @@ pub fn CyclableLabel(comptime ItemType: type, comptime ChangeItemType: type) typ
             if (self.list.items.len == 0) return;
             if (self.width < 2) return;
 
-            var left_arrow = Cell.init('<', self.fg, self.bg);
-            var right_arrow = Cell.init('>', self.fg, self.bg);
+            var left_arrow = Cell.init('<', 0x00F4EF00, self.bg);
+            var right_arrow = Cell.init('>', 0x00F4EF00, self.bg);
 
             left_arrow.put(self.component_pos.x, self.component_pos.y) catch {};
             right_arrow.put(

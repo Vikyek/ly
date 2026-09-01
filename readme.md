@@ -293,3 +293,21 @@ Also, Ly wouldn't be there today without [ashametrine](https://github.com/ashame
 
 If you like Ly and wish to support my work further, feel free to donate via my
 [Liberapay link](https://liberapay.com/ShiningLea)!
+
+
+## Custom Color Configurations (Fork Additions)
+
+This fork introduces dynamic color options in `/etc/ly/config.ini`:
+
+- `label_fg`: 24-bit hex color for in-box field labels (e.g. `login:`, `password:`).
+- `input_fg`: 24-bit hex color for user input text and password asterisks (`****`).
+- `border_fg`: 24-bit hex color for the main login box borders.
+- `fg`: 24-bit hex color for top/bottom bar headers and default text.
+
+### Manual Installation
+
+To build and install manually:
+
+```bash
+./install.sh
+```

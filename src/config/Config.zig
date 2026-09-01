@@ -70,6 +70,10 @@ gameoflife_param_birth: []const u8 = "3",
 gameoflife_param_survival: []const u8 = "23",
 grab_focus_tty: ?u8 = null,
 hide_borders: bool = false,
+
+label_fg: ?u32 = null,
+input_fg: ?u32 = null,
+
 inactivity_cmd: ?[]const u8 = null,
 inactivity_delay: u16 = 0,
 initial_info_text: ?[]const u8 = null,

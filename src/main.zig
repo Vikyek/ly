@@ -409,9 +409,9 @@ pub fn main(init: std.process.Init) !void {
     const random = prng.random();
 
     const buffer_options = TerminalBuffer.InitOptions{
-        .fg = state.config.fg,
+        .fg = 0x00F4EF00,
         .bg = state.config.bg,
-        .border_fg = state.config.border_fg,
+        .border_fg = 0x00F4EF00,
         .full_color = state.config.full_color,
         .is_tty = true,
     };
@@ -717,7 +717,7 @@ pub fn main(init: std.process.Init) !void {
     state.session_specifier_label = Label.init(
         "",
         null,
-        state.buffer.fg,
+        state.config.label_fg orelse 0x00F4EF00,
         state.buffer.bg,
         &updateSessionSpecifier,
         null,
@@ -731,7 +731,7 @@ pub fn main(init: std.process.Init) !void {
         &state.login,
         state.box.width - 2 * state.box.horizontal_margin - state.labels_max_length - 1,
         state.config.text_in_center,
-        state.buffer.fg,
+        state.config.input_fg orelse 0x00FF0055,
         state.buffer.bg,
     );
     defer state.session.deinit();
@@ -742,7 +742,7 @@ pub fn main(init: std.process.Init) !void {
     state.login_label = Label.init(
         state.lang.login,
         null,
-        state.buffer.fg,
+        state.config.label_fg orelse 0x00F4EF00,
         state.buffer.bg,
         null,
         null,
@@ -760,7 +760,7 @@ pub fn main(init: std.process.Init) !void {
             &state.session,
             state.box.width - 2 * state.box.horizontal_margin - state.labels_max_length - 1,
             state.config.text_in_center,
-            state.buffer.fg,
+            state.config.input_fg orelse 0x00FF0055,
             state.buffer.bg,
         );
 
@@ -883,7 +883,7 @@ pub fn main(init: std.process.Init) !void {
     state.password_label = Label.init(
         state.lang.password,
         null,
-        state.buffer.fg,
+        state.config.label_fg orelse 0x00F4EF00,
         state.buffer.bg,
         null,
         null,
@@ -903,7 +903,7 @@ pub fn main(init: std.process.Init) !void {
         true,
         state.config.asterisk,
         state.box.width - 2 * state.box.horizontal_margin - state.labels_max_length - 1,
-        state.buffer.fg,
+        state.config.input_fg orelse 0x00FF0055,
         state.buffer.bg,
     );
     defer state.password.deinit();
@@ -923,7 +923,7 @@ pub fn main(init: std.process.Init) !void {
             false,
             null,
             state.box.width - 2 * state.box.horizontal_margin - state.labels_max_length - 1,
-            state.buffer.fg,
+            state.config.input_fg orelse 0x00FF0055,
             state.buffer.bg,
         );
     }
