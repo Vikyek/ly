@@ -413,10 +413,7 @@ pub fn getCell(x: usize, y: usize) ?Cell {
 pub fn resolveColor(color: u32) u32 {
     if (color == 0) return 0;
 
-    const maybe_term = std.c.getenv("TERM");
-    const is_linux_tty = if (maybe_term) |term| std.mem.eql(u8, std.mem.span(term), "linux") else false;
-
-    if (!is_linux_tty and termbox.global.output_mode == termbox.TB_OUTPUT_TRUECOLOR) {
+    if (termbox.global.output_mode == termbox.TB_OUTPUT_TRUECOLOR) {
         return color;
     }
 
