@@ -407,13 +407,35 @@ pub fn getCell(x: usize, y: usize) ?Cell {
     return null;
 }
 
+
+
+pub fn resolveColor(color: u32) u32 {
+    if (color == 0) return 0;
+    if (termbox.global.output_mode == termbox.TB_OUTPUT_TRUECOLOR) {
+        return color;
+    }
+
+    const r: u32 = (color >> 16) & 0xFF;
+    const g: u32 = (color >> 8) & 0xFF;
+    const b: u32 = color & 0xFF;
+
+    if (r > 150 and g < 100) return termbox.TB_RED | termbox.TB_BOLD;
+    if (r > 150 and g > 150) return termbox.TB_YELLOW | termbox.TB_BOLD;
+    if (b > 150 and r < 100) return termbox.TB_BLUE | termbox.TB_BOLD;
+    if (r > 150 and g > 150 and b > 150) return termbox.TB_WHITE | termbox.TB_BOLD;
+
+    return color;
+}
+
 pub fn setCell(x: usize, y: usize, cell: Cell) !void {
+    const fg = resolveColor(cell.fg);
+    const bg = resolveColor(cell.bg);
     if (termbox.tb_set_cell(
         @intCast(x),
         @intCast(y),
         cell.ch,
-        cell.fg,
-        cell.bg,
+        fg,
+        bg,
     ) != 0) {
         return error.TermboxSetCellFailed;
     }
